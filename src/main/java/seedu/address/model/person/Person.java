@@ -47,8 +47,12 @@ public class Person {
         return phone;
     }
 
-    public Email getEmail() { return email;}
-    public Remark getRemark() { return remark;}
+    public Email getEmail() {
+        return email; }
+
+    public Remark getRemark() {
+        return remark; }
+
     public Address getAddress() {
         return address;
     }

@@ -89,7 +89,7 @@ public class ParserUtil {
      */
     public static Remark parseRemark(String remark) throws ParseException {
         requireNonNull(remark);
-        String trimmedRemark= remark.trim();
+        String trimmedRemark = remark.trim();
         if (!Address.isValidAddress(trimmedRemark)) {
             throw new ParseException(Address.MESSAGE_CONSTRAINTS);
         }
