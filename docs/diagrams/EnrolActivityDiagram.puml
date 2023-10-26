@@ -1,0 +1,37 @@
+@startuml
+!include style.puml
+
+start
+
+:user enters an enrol command in
+the command box;
+
+:EnrolCommandParser parses the argument;
+
+if () then ([valid command input format])
+    if () then ([valid indexes])
+        :get member and event
+        from the respective filtered lists;
+        :create a new Attendance object;
+        if () then ([non-duplicate attendance]))
+        :add new attendance to
+        uniqueAttendanceList in the model;
+        :commit this state to the model;
+        else ([else])
+            :throws CommandException
+            with error message;
+        endif
+    else ([else])
+        :throws CommandException
+        with error message;
+    endif
+else ([else])
+    :throws ParseException
+    with command usage
+    direction;
+endif
+:returns feedback to user;
+
+stop
+
+@enduml

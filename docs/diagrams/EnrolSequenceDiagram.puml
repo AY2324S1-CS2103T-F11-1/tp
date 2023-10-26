@@ -1,0 +1,86 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":CcaCommanderParser" as CcaCommanderParser LOGIC_COLOR
+participant ":EnrolCommandParser" as EnrolCommandParser LOGIC_COLOR
+participant ":EnrolCommand" as EnrolCommand LOGIC_COLOR
+participant ":Attendance" as Attendance LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute(...)
+activate LogicManager
+
+LogicManager -> CcaCommanderParser : parseCommand(...)
+activate CcaCommanderParser
+
+create EnrolCommandParser
+CcaCommanderParser -> EnrolCommandParser
+activate EnrolCommandParser
+
+EnrolCommandParser --> CcaCommanderParser
+deactivate EnrolCommandParser
+
+CcaCommanderParser -> EnrolCommandParser: parse(...)
+activate EnrolCommandParser
+
+create EnrolCommand
+EnrolCommandParser -> EnrolCommand
+activate EnrolCommand
+
+EnrolCommand --> EnrolCommandParser
+deactivate EnrolCommand
+
+EnrolCommandParser --> CcaCommanderParser
+deactivate EnrolCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+EnrolCommandParser -[hidden]-> CcaCommanderParser
+destroy EnrolCommandParser
+
+CcaCommanderParser --> LogicManager
+deactivate CcaCommanderParser
+
+LogicManager -> EnrolCommand : execute()
+activate EnrolCommand
+
+EnrolCommand -> Model : getFilteredMemberList()
+activate Model
+deactivate Model
+
+EnrolCommand -> Model : getFilteredEventClassList()
+activate Model
+deactivate Model
+
+create Attendance
+EnrolCommand -> Attendance
+activate Attendance
+Attendance --> EnrolCommand : attendance
+deactivate Attendance
+
+EnrolCommand -> Model : createAttendance(attendance)
+activate Model
+deactivate Model
+
+EnrolCommand -> Model : commit()
+activate Model
+deactivate Model
+
+create CommandResult
+EnrolCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> EnrolCommand
+deactivate CommandResult
+
+EnrolCommand --> LogicManager : result
+deactivate EnrolCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml
