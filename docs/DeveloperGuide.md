@@ -194,7 +194,6 @@ The following activity diagram shows how the `EnrolCommand` works.
         * Reduced coupling, enhancing maintainability
     * Cons:
         * Not standardised with other creation commands.
-      
 
 * **Alternative 2:** `EnrolCommand` has parameter `Attendance attendance`
     * Pros:
