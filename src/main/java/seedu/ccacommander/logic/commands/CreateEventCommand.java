@@ -33,6 +33,7 @@ public class CreateEventCommand extends Command {
             + PREFIX_TAG + "sem1 ";
 
     public static final String MESSAGE_SUCCESS = "New event added: %1$s";
+    public static final String MESSAGE_COMMIT = "New event added: %1$s";
     public static final String MESSAGE_DUPLICATE_EVENT = "This event already exists in CCACommander. ";
 
     private final Event toCreate;
@@ -54,6 +55,7 @@ public class CreateEventCommand extends Command {
         }
 
         model.createEvent(toCreate);
+        model.commit(String.format(MESSAGE_COMMIT, toCreate.getName()));
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toCreate)));
     }
 

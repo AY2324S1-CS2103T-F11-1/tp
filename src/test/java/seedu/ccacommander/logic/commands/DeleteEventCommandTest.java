@@ -32,11 +32,13 @@ public class DeleteEventCommandTest {
         Event eventToDelete = model.getFilteredEventList().get(INDEX_FIRST_EVENT.getZeroBased());
         DeleteEventCommand deleteEventCommand = new DeleteEventCommand(INDEX_FIRST_EVENT);
 
+        String commitMessage = String.format(DeleteEventCommand.MESSAGE_COMMIT, eventToDelete.getName());
         String expectedMessage = String.format(DeleteEventCommand.MESSAGE_DELETE_EVENT_SUCCESS,
                 Messages.format(eventToDelete));
 
         ModelManager expectedModel = new ModelManager(model.getCcaCommander(), new UserPrefs());
         expectedModel.deleteEvent(eventToDelete);
+        expectedModel.commit(commitMessage);
 
         assertCommandSuccess(deleteEventCommand, model, expectedMessage, expectedModel);
     }
@@ -56,11 +58,13 @@ public class DeleteEventCommandTest {
         Event eventToDelete = model.getFilteredEventList().get(INDEX_FIRST_EVENT.getZeroBased());
         DeleteEventCommand deleteEventCommand = new DeleteEventCommand(INDEX_FIRST_EVENT);
 
+        String commitMessage = String.format(DeleteEventCommand.MESSAGE_COMMIT, eventToDelete.getName());
         String expectedMessage = String.format(DeleteEventCommand.MESSAGE_DELETE_EVENT_SUCCESS,
                 Messages.format(eventToDelete));
 
         Model expectedModel = new ModelManager(model.getCcaCommander(), new UserPrefs());
         expectedModel.deleteEvent(eventToDelete);
+        expectedModel.commit(commitMessage);
         showNoEvent(expectedModel);
 
         assertCommandSuccess(deleteEventCommand, model, expectedMessage, expectedModel);

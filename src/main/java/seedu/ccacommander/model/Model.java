@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.ccacommander.commons.core.GuiSettings;
+import seedu.ccacommander.model.attendance.Attendance;
 import seedu.ccacommander.model.event.Event;
 import seedu.ccacommander.model.member.Member;
 
@@ -15,6 +16,7 @@ public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Member> PREDICATE_SHOW_ALL_MEMBERS = unused -> true;
     Predicate<Event> PREDICATE_SHOW_ALL_EVENTS = unused -> true;
+    Predicate<Attendance> PREDICATE_SHOW_ALL_ATTENDANCES = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -98,10 +100,23 @@ public interface Model {
      */
     void setEvent(Event target, Event editedEvent);
 
+    /**
+     * Returns true if an attendance with the same identity as {@code attendance} exists in CcaCommander.
+     */
+    boolean hasAttendance(Attendance attendance);
+
+    /**
+     * Creates the given event.
+     * {@code attendance} must not already exist in CcaCommander.
+     */
+    void createAttendance(Attendance attendance);
+
     /** Returns an unmodifiable view of the filtered member list */
     ObservableList<Member> getFilteredMemberList();
 
     ObservableList<Event> getFilteredEventList();
+
+    ObservableList<Attendance> getFilteredAttendanceList();
 
     /**
      * Updates the filter of the filtered member list to filter by the given {@code predicate}.
@@ -114,4 +129,37 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredEventList(Predicate<Event> predicate);
+
+    /**
+     * Updates the filter of the filtered event list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredAttendanceList(Predicate<Attendance> predicate);
+
+    void commit(String commitMessage);
+
+    /**
+     * Returns true if there is a {@code Command} that can be undone.
+     */
+    boolean canUndo();
+
+    /**
+     * Undoes the most recent undoable {@code Command}
+     */
+    String undo();
+
+    /**
+     * Returns true if there is a {@code Command} that can be redone.
+     */
+    boolean canRedo();
+
+    /**
+     * Redoes the most recent redoable {@code Command}
+     */
+    String redo();
+
+    /**
+     * Returns a summary of all commands currently captured by this {@code Model}.
+     */
+    VersionCaptures viewVersionCaptures();
 }

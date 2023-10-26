@@ -32,11 +32,13 @@ public class DeleteMemberCommandTest {
         Member memberToDelete = model.getFilteredMemberList().get(INDEX_FIRST_MEMBER.getZeroBased());
         DeleteMemberCommand deleteMemberCommand = new DeleteMemberCommand(INDEX_FIRST_MEMBER);
 
+        String commitMessage = String.format(DeleteMemberCommand.MESSAGE_COMMIT, memberToDelete.getName());
         String expectedMessage = String.format(DeleteMemberCommand.MESSAGE_DELETE_MEMBER_SUCCESS,
                 Messages.format(memberToDelete));
 
         ModelManager expectedModel = new ModelManager(model.getCcaCommander(), new UserPrefs());
         expectedModel.deleteMember(memberToDelete);
+        expectedModel.commit(commitMessage);
 
         assertCommandSuccess(deleteMemberCommand, model, expectedMessage, expectedModel);
     }
@@ -56,11 +58,13 @@ public class DeleteMemberCommandTest {
         Member memberToDelete = model.getFilteredMemberList().get(INDEX_FIRST_MEMBER.getZeroBased());
         DeleteMemberCommand deleteMemberCommand = new DeleteMemberCommand(INDEX_FIRST_MEMBER);
 
+        String commitMessage = String.format(DeleteMemberCommand.MESSAGE_COMMIT, memberToDelete.getName());
         String expectedMessage = String.format(DeleteMemberCommand.MESSAGE_DELETE_MEMBER_SUCCESS,
                 Messages.format(memberToDelete));
 
         Model expectedModel = new ModelManager(model.getCcaCommander(), new UserPrefs());
         expectedModel.deleteMember(memberToDelete);
+        expectedModel.commit(commitMessage);
         showNoMember(expectedModel);
 
         assertCommandSuccess(deleteMemberCommand, model, expectedMessage, expectedModel);

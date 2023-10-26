@@ -39,6 +39,7 @@ public class CreateMemberCommand extends Command {
             + PREFIX_TAG + "owesMoney";
 
     public static final String MESSAGE_SUCCESS = "New member added: %1$s";
+    public static final String MESSAGE_COMMIT = "New member added: %1$s";
     public static final String MESSAGE_DUPLICATE_MEMBER = "This member already exists in CCACommander";
 
     private final Member toAdd;
@@ -60,6 +61,7 @@ public class CreateMemberCommand extends Command {
         }
 
         model.createMember(toAdd);
+        model.commit(String.format(MESSAGE_COMMIT, toAdd.getName()));
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
     }
 

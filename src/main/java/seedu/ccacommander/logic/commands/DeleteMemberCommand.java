@@ -22,6 +22,7 @@ public class DeleteMemberCommand extends Command {
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
     public static final String MESSAGE_DELETE_MEMBER_SUCCESS = "Deleted Member: %1$s";
+    public static final String MESSAGE_COMMIT = "Deleted Member: %1$s.";
     private final Index targetIndex;
 
     public DeleteMemberCommand(Index targetIndex) {
@@ -39,6 +40,7 @@ public class DeleteMemberCommand extends Command {
 
         Member memberToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deleteMember(memberToDelete);
+        model.commit(String.format(MESSAGE_COMMIT, memberToDelete.getName()));
         return new CommandResult(String.format(MESSAGE_DELETE_MEMBER_SUCCESS, Messages.format(memberToDelete)));
     }
 

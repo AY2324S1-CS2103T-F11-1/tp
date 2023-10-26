@@ -22,6 +22,7 @@ public class DeleteEventCommand extends Command {
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
     public static final String MESSAGE_DELETE_EVENT_SUCCESS = "Deleted Event: %1$s";
+    public static final String MESSAGE_COMMIT = "Deleted Event: %1$s";
     private final Index targetIndex;
 
     public DeleteEventCommand(Index targetIndex) {
@@ -39,6 +40,7 @@ public class DeleteEventCommand extends Command {
 
         Event eventToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deleteEvent(eventToDelete);
+        model.commit(String.format(MESSAGE_COMMIT, eventToDelete.getName()));
         return new CommandResult(String.format(MESSAGE_DELETE_EVENT_SUCCESS, Messages.format(eventToDelete)));
     }
 

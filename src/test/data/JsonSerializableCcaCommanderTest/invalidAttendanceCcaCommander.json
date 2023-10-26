@@ -1,0 +1,10 @@
+{"members" : [ ],
+  "events": [ ],
+  "attendances" : [{
+    "memberName" : "Alice Pauline",
+    "eventName" : "Aurora Borealis",
+    "hours" : "-3",
+    "remark" : "Role: Photographer"
+  }]
+}
+

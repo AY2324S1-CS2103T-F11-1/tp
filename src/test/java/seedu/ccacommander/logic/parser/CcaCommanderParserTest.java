@@ -26,6 +26,8 @@ import seedu.ccacommander.logic.commands.FindEventCommand;
 import seedu.ccacommander.logic.commands.FindMemberCommand;
 import seedu.ccacommander.logic.commands.HelpCommand;
 import seedu.ccacommander.logic.commands.ListCommand;
+import seedu.ccacommander.logic.commands.RedoCommand;
+import seedu.ccacommander.logic.commands.UndoCommand;
 import seedu.ccacommander.logic.parser.exceptions.ParseException;
 import seedu.ccacommander.model.event.Event;
 import seedu.ccacommander.model.event.EventNameContainsKeywordsPredicate;
@@ -63,6 +65,7 @@ public class CcaCommanderParserTest {
         assertEquals(new DeleteMemberCommand(INDEX_FIRST_MEMBER), command);
     }
 
+    @Test
     public void parseCommand_createEvent() throws Exception {
         Event event = new EventBuilder().build();
         CreateEventCommand command = (CreateEventCommand) parser.parseCommand(
@@ -107,6 +110,17 @@ public class CcaCommanderParserTest {
                 FindEventCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
         assertEquals(new FindEventCommand(new EventNameContainsKeywordsPredicate(keywords)), command);
     }
+
+    @Test
+    public void parseCommand_undo() throws Exception {
+        assertTrue(parser.parseCommand(UndoCommand.COMMAND_WORD) instanceof UndoCommand);
+    }
+
+    @Test
+    public void parseCommand_redo() throws Exception {
+        assertTrue(parser.parseCommand(RedoCommand.COMMAND_WORD) instanceof RedoCommand);
+    }
+
     @Test
     public void parseCommand_help() throws Exception {
         assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD) instanceof HelpCommand);

@@ -30,8 +30,10 @@ public class CreateMemberCommandIntegrationTest {
     public void execute_newMember_success() {
         Member validMember = new MemberBuilder().build();
 
+        String commitMessage = String.format(CreateMemberCommand.MESSAGE_COMMIT, validMember.getName());
         Model expectedModel = new ModelManager(model.getCcaCommander(), new UserPrefs());
         expectedModel.createMember(validMember);
+        expectedModel.commit(commitMessage);
 
         assertCommandSuccess(new CreateMemberCommand(validMember), model,
                 String.format(CreateMemberCommand.MESSAGE_SUCCESS, Messages.format(validMember)),

@@ -16,6 +16,7 @@ public class ClearCommandTest {
     public void execute_emptyCcaCommander_success() {
         Model model = new ModelManager();
         Model expectedModel = new ModelManager();
+        expectedModel.commit(ClearCommand.MESSAGE_SUCCESS);
 
         assertCommandSuccess(new ClearCommand(), model, ClearCommand.MESSAGE_SUCCESS, expectedModel);
     }
@@ -25,6 +26,7 @@ public class ClearCommandTest {
         Model model = new ModelManager(getTypicalCcaCommander(), new UserPrefs());
         Model expectedModel = new ModelManager(getTypicalCcaCommander(), new UserPrefs());
         expectedModel.setCcaCommander(new CcaCommander());
+        expectedModel.commit(ClearCommand.MESSAGE_SUCCESS);
 
         assertCommandSuccess(new ClearCommand(), model, ClearCommand.MESSAGE_SUCCESS, expectedModel);
     }

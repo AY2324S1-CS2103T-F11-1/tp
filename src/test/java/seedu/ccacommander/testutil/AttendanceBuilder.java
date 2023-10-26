@@ -10,10 +10,10 @@ import seedu.ccacommander.model.shared.Name;
  */
 public class AttendanceBuilder {
 
-    public static final String DEFAULT_MEMBER_NAME = "Amy Bee";
-    public static final String DEFAULT_EVENT_NAME = "Rock climbing session 1";
-    public static final String DEFAULT_HOURS = "0";
-    public static final String DEFAULT_REMARK = "Absent due to Covid";
+    public static final String DEFAULT_MEMBER_NAME = "Alice Pauline";
+    public static final String DEFAULT_EVENT_NAME = "Aurora Borealis";
+    public static final String DEFAULT_HOURS = "3";
+    public static final String DEFAULT_REMARK = "Role: Photographer";
 
     private Name memberName;
     private Name eventName;

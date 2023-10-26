@@ -23,6 +23,7 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.ccacommander.model.attendance.Attendance;
 import seedu.ccacommander.model.event.Event;
 import seedu.ccacommander.model.event.exceptions.DuplicateEventException;
 import seedu.ccacommander.model.member.Member;
@@ -135,7 +136,7 @@ public class CcaCommanderTest {
     @Test
     public void toStringMethod() {
         String expected = CcaCommander.class.getCanonicalName() + "{members=" + ccaCommander.getMemberList()
-                + ", events=" + ccaCommander.getEventList() + "}";
+                + ", events=" + ccaCommander.getEventList() + ", attendances=" + ccaCommander.getEventList() + "}";
         assertEquals(expected, ccaCommander.toString());
     }
 
@@ -145,6 +146,7 @@ public class CcaCommanderTest {
     private static class CcaCommanderStub implements ReadOnlyCcaCommander {
         private final ObservableList<Member> members = FXCollections.observableArrayList();
         private final ObservableList<Event> events = FXCollections.observableArrayList();
+        private final ObservableList<Attendance> attendances = FXCollections.observableArrayList();
 
         CcaCommanderStub(Collection<Member> members, Collection<Event> events) {
             this.members.setAll(members);
@@ -158,6 +160,10 @@ public class CcaCommanderTest {
         @Override
         public ObservableList<Event> getEventList() {
             return events;
+        }
+        @Override
+        public ObservableList<Attendance> getAttendanceList() {
+            return attendances;
         }
     }
 

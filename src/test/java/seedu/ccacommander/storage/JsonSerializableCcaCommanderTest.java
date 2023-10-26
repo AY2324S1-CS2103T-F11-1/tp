@@ -2,6 +2,7 @@ package seedu.ccacommander.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.ccacommander.testutil.Assert.assertThrows;
+import static seedu.ccacommander.testutil.TypicalCcaCommander.getTypicalAttendanceCcaCommander;
 import static seedu.ccacommander.testutil.TypicalCcaCommander.getTypicalEventCcaCommander;
 import static seedu.ccacommander.testutil.TypicalCcaCommander.getTypicalMemberCcaCommander;
 
@@ -23,6 +24,10 @@ public class JsonSerializableCcaCommanderTest {
     private static final Path TYPICAL_EVENT_FILE = TEST_DATA_FOLDER.resolve("typicalEventsCcaCommander.json");
     private static final Path INVALID_EVENT_FILE = TEST_DATA_FOLDER.resolve("invalidEventCcaCommander.json");
     private static final Path DUPLICATE_EVENT_FILE = TEST_DATA_FOLDER.resolve("duplicateEventCcaCommander.json");
+    private static final Path TYPICAL_ATTENDANCE_FILE = TEST_DATA_FOLDER.resolve("typicalAttendanceCcaCommander.json");
+    private static final Path INVALID_ATTENDANCE_FILE = TEST_DATA_FOLDER.resolve("invalidAttendanceCcaCommander.json");
+    private static final Path DUPLICATE_ATTENDANCE_FILE = TEST_DATA_FOLDER.resolve(
+            "duplicateAttendanceCcaCommander.json");
 
     @Test
     public void toModelType_typicalMembersFile_success() throws Exception {
@@ -69,6 +74,30 @@ public class JsonSerializableCcaCommanderTest {
         JsonSerializableCcaCommander dataFromFile = JsonUtil.readJsonFile(DUPLICATE_EVENT_FILE,
                 JsonSerializableCcaCommander.class).get();
         assertThrows(IllegalValueException.class, JsonSerializableCcaCommander.MESSAGE_DUPLICATE_EVENT,
+                dataFromFile::toModelType);
+    }
+
+    @Test
+    public void toModelType_typicalAttendanceFile_success() throws Exception {
+        JsonSerializableCcaCommander dataFromFile = JsonUtil.readJsonFile(TYPICAL_ATTENDANCE_FILE,
+                JsonSerializableCcaCommander.class).get();
+        CcaCommander ccaCommanderFromFile = dataFromFile.toModelType();
+        CcaCommander typicalAttendanceCcaCommander = getTypicalAttendanceCcaCommander();
+        assertEquals(ccaCommanderFromFile, typicalAttendanceCcaCommander);
+    }
+
+    @Test
+    public void toModelType_invalidAttendanceFile_throwsIllegalValueException() throws Exception {
+        JsonSerializableCcaCommander dataFromFile = JsonUtil.readJsonFile(INVALID_ATTENDANCE_FILE,
+                JsonSerializableCcaCommander.class).get();
+        assertThrows(IllegalValueException.class, dataFromFile::toModelType);
+    }
+
+    @Test
+    public void toModelType_duplicateAttendance_throwsIllegalValueException() throws Exception {
+        JsonSerializableCcaCommander dataFromFile = JsonUtil.readJsonFile(DUPLICATE_ATTENDANCE_FILE,
+                JsonSerializableCcaCommander.class).get();
+        assertThrows(IllegalValueException.class, JsonSerializableCcaCommander.MESSAGE_DUPLICATE_ATTENDANCE,
                 dataFromFile::toModelType);
     }
 }

@@ -36,5 +36,6 @@
     "eventDate" : "1666-06-18",
     "location" : "Cambridge University",
     "tags" : [ ]
-  } ]
+  } ],
+  "attendances" : [ ]
 }

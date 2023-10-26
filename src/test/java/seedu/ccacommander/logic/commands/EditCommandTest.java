@@ -41,10 +41,12 @@ public class EditCommandTest {
         EditCommand.EditMemberDescriptor descriptor = new EditMemberDescriptorBuilder(editedMember).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_MEMBER, descriptor);
 
+        String commitMessage = String.format(EditCommand.MESSAGE_COMMIT, editedMember.getName());
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_MEMBER_SUCCESS, Messages.format(editedMember));
 
         Model expectedModel = new ModelManager(new CcaCommander(model.getCcaCommander()), new UserPrefs());
         expectedModel.setMember(model.getFilteredMemberList().get(0), editedMember);
+        expectedModel.commit(commitMessage);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
@@ -62,10 +64,12 @@ public class EditCommandTest {
                 .withPhone(VALID_PHONE_BOB).withTags(VALID_TAG_HUSBAND).build();
         EditCommand editCommand = new EditCommand(indexLastMember, descriptor);
 
+        String commitMessage = String.format(EditCommand.MESSAGE_COMMIT, editedMember.getName());
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_MEMBER_SUCCESS, Messages.format(editedMember));
 
         Model expectedModel = new ModelManager(new CcaCommander(model.getCcaCommander()), new UserPrefs());
         expectedModel.setMember(lastMember, editedMember);
+        expectedModel.commit(commitMessage);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
@@ -75,9 +79,11 @@ public class EditCommandTest {
         EditCommand editCommand = new EditCommand(INDEX_FIRST_MEMBER, new EditCommand.EditMemberDescriptor());
         Member editedMember = model.getFilteredMemberList().get(INDEX_FIRST_MEMBER.getZeroBased());
 
+        String commitMessage = String.format(EditCommand.MESSAGE_COMMIT, editedMember.getName());
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_MEMBER_SUCCESS, Messages.format(editedMember));
 
         Model expectedModel = new ModelManager(new CcaCommander(model.getCcaCommander()), new UserPrefs());
+        expectedModel.commit(commitMessage);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
@@ -91,10 +97,12 @@ public class EditCommandTest {
         EditCommand editCommand = new EditCommand(INDEX_FIRST_MEMBER,
                 new EditMemberDescriptorBuilder().withName(VALID_NAME_BOB).build());
 
+        String commitMessage = String.format(EditCommand.MESSAGE_COMMIT, editedMember.getName());
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_MEMBER_SUCCESS, Messages.format(editedMember));
 
         Model expectedModel = new ModelManager(new CcaCommander(model.getCcaCommander()), new UserPrefs());
         expectedModel.setMember(model.getFilteredMemberList().get(0), editedMember);
+        expectedModel.commit(commitMessage);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }

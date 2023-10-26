@@ -1,0 +1,42 @@
+{
+  "_comment": "CCACommander save file which contains the same Attendance values as in TypicalAttendances#getTypicalAttendance()",
+  "members" : [ ],
+  "events": [ ],
+  "attendances" : [{
+    "memberName" : "Alice Pauline",
+    "eventName" : "Aurora Borealis",
+    "hours" : "3",
+    "remark" : "Role: Photographer"
+  }, {
+    "memberName" : "Benson Meier",
+    "eventName" : "Boxing Day",
+    "hours" : "7",
+    "remark" : "Bring boxing gloves"
+  }, {
+    "memberName" : "Carl Kurz",
+    "eventName" : "Chinese New Year",
+    "hours" : "3",
+    "remark" : "Brought red packets"
+  }, {
+    "memberName" : "Daniel Meier",
+    "eventName" : "Dog Celebration Day",
+    "hours" : "5",
+    "remark" : "Bringing dogs"
+  }, {
+    "memberName" : "Elle Meyer",
+    "eventName" : "Echo Day",
+    "hours" : "0",
+    "remark" : "Absent without reason"
+  }, {
+    "memberName" : "Fiona Kunz",
+    "eventName" : "Festival",
+    "hours" : "2",
+    "remark" : "Usher"
+  },{
+    "memberName" : "George Best",
+    "eventName" : "Gravity Discovery Day",
+    "hours" : "1",
+    "remark" : "Discovered gravity"
+  }]
+}
+

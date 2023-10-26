@@ -3,7 +3,7 @@ package seedu.ccacommander.model.attendance;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.ccacommander.logic.commands.CommandTestUtil.VALID_HOURS_CLIMBING;
+import static seedu.ccacommander.logic.commands.CommandTestUtil.VALID_HOURS_AURORA;
 import static seedu.ccacommander.testutil.Assert.assertThrows;
 import static seedu.ccacommander.testutil.TypicalAttendances.ALICE_AURORA;
 import static seedu.ccacommander.testutil.TypicalAttendances.BENSON_BOXING;
@@ -41,7 +41,7 @@ public class UniqueAttendanceListTest {
     @Test
     public void contains_eventWithSameIdentityFieldsInList_returnsTrue() {
         uniqueAttendanceList.createAttendance(ALICE_AURORA);
-        Attendance editedHours = new AttendanceBuilder(ALICE_AURORA).withHours(VALID_HOURS_CLIMBING)
+        Attendance editedHours = new AttendanceBuilder(ALICE_AURORA).withHours(VALID_HOURS_AURORA)
                 .build();
         assertTrue(uniqueAttendanceList.contains(editedHours));
     }
@@ -85,7 +85,7 @@ public class UniqueAttendanceListTest {
     @Test
     public void setEvent_editedAttendanceHasSameIdentity_success() {
         uniqueAttendanceList.createAttendance(ALICE_AURORA);
-        Attendance editedHours = new AttendanceBuilder(ALICE_AURORA).withHours(VALID_HOURS_CLIMBING)
+        Attendance editedHours = new AttendanceBuilder(ALICE_AURORA).withHours(VALID_HOURS_AURORA)
                 .build();
         uniqueAttendanceList.setAttendance(ALICE_AURORA, editedHours);
         UniqueAttendanceList expectedUniqueEventList = new UniqueAttendanceList();

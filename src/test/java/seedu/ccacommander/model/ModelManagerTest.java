@@ -19,11 +19,14 @@ import org.junit.jupiter.api.Test;
 
 import seedu.ccacommander.commons.core.GuiSettings;
 import seedu.ccacommander.model.event.EventNameContainsKeywordsPredicate;
+import seedu.ccacommander.model.exceptions.RedoStateException;
+import seedu.ccacommander.model.exceptions.UndoStateException;
 import seedu.ccacommander.model.member.MemberNameContainsKeywordsPredicate;
 import seedu.ccacommander.testutil.CcaCommanderBuilder;
 
 public class ModelManagerTest {
 
+    private static final String COMMIT_MESSAGE = "Example Commit";
     private ModelManager modelManager = new ModelManager();
 
     @Test
@@ -75,6 +78,53 @@ public class ModelManagerTest {
         modelManager.setCcaCommanderFilePath(path);
         assertEquals(path, modelManager.getCcaCommanderFilePath());
     }
+
+    @Test
+    public void canUndo_hasPreviousVersion_returnsTrue() {
+        modelManager.commit(COMMIT_MESSAGE);
+        assertTrue(modelManager.canUndo());
+    }
+
+    @Test
+    public void canUndo_noPreviousVersion_returnsFalse() {
+        assertFalse(modelManager.canUndo());
+    }
+
+    @Test
+    public void undo_hasPreviousVersion_returnsCommitMessage() {
+        modelManager.commit(COMMIT_MESSAGE);
+        assertEquals(COMMIT_MESSAGE, modelManager.undo());
+    }
+
+    @Test
+    public void undo_noPreviousVersion_throwsUndoStateException() {
+        assertThrows(UndoStateException.class, () -> modelManager.undo());
+    }
+
+    @Test
+    public void canRedo_hasNextVersion_returnsTrue() {
+        modelManager.commit(COMMIT_MESSAGE);
+        modelManager.undo();
+        assertTrue(modelManager.canRedo());
+    }
+
+    @Test
+    public void canRedo_noNextVersion_returnsFalse() {
+        assertFalse(modelManager.canRedo());
+    }
+
+    @Test
+    public void redo_hasNextVersion_returnsCommitMessage() {
+        modelManager.commit(COMMIT_MESSAGE);
+        modelManager.undo();
+        assertEquals(COMMIT_MESSAGE, modelManager.redo());
+    }
+
+    @Test
+    public void redo_noNextVersion_throwsRedoStateException() {
+        assertThrows(RedoStateException.class, () -> modelManager.redo());
+    }
+
 
     @Test
     public void hasMember_nullMember_throwsNullPointerException() {

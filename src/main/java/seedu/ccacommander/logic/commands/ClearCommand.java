@@ -18,6 +18,7 @@ public class ClearCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.setCcaCommander(new CcaCommander());
+        model.commit(MESSAGE_SUCCESS);
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }

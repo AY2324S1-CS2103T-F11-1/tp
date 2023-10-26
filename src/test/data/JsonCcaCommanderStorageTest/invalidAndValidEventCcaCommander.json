@@ -8,5 +8,6 @@
     "name": "Event with Invalid eventDate field",
     "eventDate": "2023-99-99",
     "location": "Somewhere invalid"
-  } ]
+  } ],
+  "attendances" : [ ]
 }

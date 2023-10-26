@@ -9,6 +9,8 @@ import java.util.Set;
 import seedu.ccacommander.commons.core.index.Index;
 import seedu.ccacommander.commons.util.StringUtil;
 import seedu.ccacommander.logic.parser.exceptions.ParseException;
+import seedu.ccacommander.model.attendance.Hours;
+import seedu.ccacommander.model.attendance.Remark;
 import seedu.ccacommander.model.event.EventDate;
 import seedu.ccacommander.model.event.Location;
 import seedu.ccacommander.model.member.Address;
@@ -141,6 +143,36 @@ public class ParserUtil {
             throw new ParseException(EventDate.MESSAGE_CONSTRAINTS);
         }
         return new EventDate(trimmedEventDate);
+    }
+
+    /**
+     * Parses a {@code String hours} into an {@code Hours}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code hours} is invalid.
+     */
+    public static Hours parseHours(String hours) throws ParseException {
+        requireNonNull(hours);
+        String trimmedHours = hours.trim();
+        if (!Hours.isValidHours(trimmedHours)) {
+            throw new ParseException(Hours.MESSAGE_CONSTRAINTS);
+        }
+        return new Hours(trimmedHours);
+    }
+
+    /**
+     * Parses a {@code String remark} into an {@code Remark}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code remark} is invalid.
+     */
+    public static Remark parseRemark(String remark) throws ParseException {
+        requireNonNull(remark);
+        String trimmedRemark = remark.trim();
+        if (!Remark.isValidRemark(trimmedRemark)) {
+            throw new ParseException(Remark.MESSAGE_CONSTRAINTS);
+        }
+        return new Remark(trimmedRemark);
     }
 
     /**

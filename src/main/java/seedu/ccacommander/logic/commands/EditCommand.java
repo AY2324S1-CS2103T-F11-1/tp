@@ -50,6 +50,7 @@ public class EditCommand extends Command {
             + PREFIX_EMAIL + "johndoe@example.com";
 
     public static final String MESSAGE_EDIT_MEMBER_SUCCESS = "Edited Member: %1$s";
+    public static final String MESSAGE_COMMIT = "Edited Member: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_MEMBER = "This member already exists in CCACommander.";
 
@@ -86,6 +87,7 @@ public class EditCommand extends Command {
 
         model.setMember(memberToEdit, editedMember);
         model.updateFilteredMemberList(PREDICATE_SHOW_ALL_MEMBERS);
+        model.commit(String.format(MESSAGE_COMMIT, editedMember.getName()));
         return new CommandResult(String.format(MESSAGE_EDIT_MEMBER_SUCCESS, Messages.format(editedMember)));
     }
 

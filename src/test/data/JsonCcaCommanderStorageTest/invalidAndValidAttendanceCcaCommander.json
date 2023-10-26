@@ -1,0 +1,16 @@
+{"members" : [ ],
+  "events": [ ],
+  "attendances" : [{
+    "memberName" : "Alice Pauline",
+    "eventName" : "Aurora Borealis",
+    "hours" : "1",
+    "remark" : "Role: Photographer"
+  },
+    {
+      "memberName" : "Benson Meier",
+      "eventName" : "Boxing Day",
+      "hours" : "-7",
+      "remark" : "Bring boxing gloves"
+    }]
+}
+

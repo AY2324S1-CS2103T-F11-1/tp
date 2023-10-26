@@ -3,12 +3,14 @@ package seedu.ccacommander.model.attendance;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.ccacommander.logic.commands.CommandTestUtil.VALID_HOURS_CLIMBING;
+import static seedu.ccacommander.logic.commands.CommandTestUtil.VALID_HOURS_AURORA;
+import static seedu.ccacommander.logic.commands.CommandTestUtil.VALID_HOURS_BOXING;
 import static seedu.ccacommander.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.ccacommander.logic.commands.CommandTestUtil.VALID_NAME_AURORA;
 import static seedu.ccacommander.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.ccacommander.logic.commands.CommandTestUtil.VALID_NAME_BOXING;
-import static seedu.ccacommander.logic.commands.CommandTestUtil.VALID_REMARK_CLIMBING;
+import static seedu.ccacommander.logic.commands.CommandTestUtil.VALID_REMARK_AURORA;
+import static seedu.ccacommander.logic.commands.CommandTestUtil.VALID_REMARK_BOXING;
 import static seedu.ccacommander.testutil.TypicalAttendances.ALICE_AURORA;
 import static seedu.ccacommander.testutil.TypicalAttendances.BENSON_BOXING;
 
@@ -27,8 +29,8 @@ public class AttendanceTest {
         assertFalse(ALICE_AURORA.isSameAttendance(null));
 
         // same name, all other attributes different -> returns true
-        Attendance editedAttendance = new AttendanceBuilder(ALICE_AURORA).withHours(VALID_HOURS_CLIMBING)
-                .withRemark(VALID_REMARK_CLIMBING).build();
+        Attendance editedAttendance = new AttendanceBuilder(ALICE_AURORA).withHours(VALID_HOURS_AURORA)
+                .withRemark(VALID_REMARK_AURORA).build();
         assertTrue(ALICE_AURORA.isSameAttendance(editedAttendance));
 
         // different name, all other attributes same -> returns false
@@ -75,11 +77,11 @@ public class AttendanceTest {
         assertFalse(ALICE_AURORA.equals(editedEventName));
 
         // different hours -> returns false
-        Attendance editedHours = new AttendanceBuilder(ALICE_AURORA).withHours(VALID_HOURS_CLIMBING).build();
+        Attendance editedHours = new AttendanceBuilder(ALICE_AURORA).withHours(VALID_HOURS_BOXING).build();
         assertFalse(ALICE_AURORA.equals(editedHours));
 
         // different remark -> returns false
-        Attendance editedRemark = new AttendanceBuilder(ALICE_AURORA).withRemark(VALID_REMARK_CLIMBING).build();
+        Attendance editedRemark = new AttendanceBuilder(ALICE_AURORA).withRemark(VALID_REMARK_BOXING).build();
         assertFalse(ALICE_AURORA.equals(editedRemark));
 
     }

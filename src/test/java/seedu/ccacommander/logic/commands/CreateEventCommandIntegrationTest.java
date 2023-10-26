@@ -30,8 +30,10 @@ public class CreateEventCommandIntegrationTest {
     public void execute_newEvent_success() {
         Event validEvent = new EventBuilder().build();
 
+        String commitMessage = String.format(CreateEventCommand.MESSAGE_COMMIT, validEvent.getName());
         Model expectedModel = new ModelManager(model.getCcaCommander(), new UserPrefs());
         expectedModel.createEvent(validEvent);
+        expectedModel.commit(commitMessage);
 
         assertCommandSuccess(new CreateEventCommand(validEvent), model,
                 String.format(CreateEventCommand.MESSAGE_SUCCESS, Messages.format(validEvent)),

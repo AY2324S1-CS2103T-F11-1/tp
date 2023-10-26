@@ -50,5 +50,6 @@
     "address" : "4th street",
     "tags" : [ ]
   } ],
-  "events": [ ]
+  "events": [ ],
+  "attendances" : [ ]
 }

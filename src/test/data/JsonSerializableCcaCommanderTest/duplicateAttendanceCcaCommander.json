@@ -1,0 +1,15 @@
+{"members" : [ ],
+  "events": [ ],
+  "attendances" : [{
+    "memberName" : "Benson Meier",
+    "eventName" : "Boxing Day",
+    "hours" : "7",
+    "remark" : "Bring boxing gloves"
+  }, {
+    "memberName" : "Benson Meier",
+    "eventName" : "Boxing Day",
+    "hours" : "7",
+    "remark" : "Bring boxing gloves"
+  }
+  ]
+}

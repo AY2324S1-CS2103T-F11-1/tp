@@ -22,6 +22,8 @@ import seedu.ccacommander.model.CcaCommander;
 import seedu.ccacommander.model.Model;
 import seedu.ccacommander.model.ReadOnlyCcaCommander;
 import seedu.ccacommander.model.ReadOnlyUserPrefs;
+import seedu.ccacommander.model.VersionCaptures;
+import seedu.ccacommander.model.attendance.Attendance;
 import seedu.ccacommander.model.event.Event;
 import seedu.ccacommander.model.member.Member;
 import seedu.ccacommander.testutil.MemberBuilder;
@@ -170,6 +172,15 @@ public class CreateMemberCommandTest {
         }
 
         @Override
+        public void createAttendance(Attendance attendance) {
+            throw new AssertionError("This method should not be called.");
+        }
+        @Override
+        public boolean hasAttendance(Attendance attendance) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public ObservableList<Member> getFilteredMemberList() {
             throw new AssertionError("This method should not be called.");
         }
@@ -186,6 +197,46 @@ public class CreateMemberCommandTest {
 
         @Override
         public void updateFilteredEventList(Predicate<Event> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Attendance> getFilteredAttendanceList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredAttendanceList(Predicate<Attendance> attendance) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void commit(String commitMessage) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean canUndo() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public String undo() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean canRedo() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public String redo() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public VersionCaptures viewVersionCaptures() {
             throw new AssertionError("This method should not be called.");
         }
     }
@@ -213,6 +264,12 @@ public class CreateMemberCommandTest {
      */
     private class ModelStubAcceptingMemberAdded extends ModelStub {
         final ArrayList<Member> membersAdded = new ArrayList<>();
+        final ArrayList<String> commitMessages = new ArrayList<>();
+
+        @Override
+        public void commit(String commitMessage) {
+            commitMessages.add(commitMessage);
+        }
 
         @Override
         public boolean hasMember(Member member) {

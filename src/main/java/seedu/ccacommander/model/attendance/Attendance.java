@@ -80,7 +80,7 @@ public class Attendance {
         Attendance otherAttendance = (Attendance) other;
         return memberName.equals(otherAttendance.memberName)
                 && eventName.equals(otherAttendance.eventName)
-                && hours == otherAttendance.hours
+                && hours.equals(otherAttendance.hours)
                 && remark.equals(otherAttendance.remark);
     }
 

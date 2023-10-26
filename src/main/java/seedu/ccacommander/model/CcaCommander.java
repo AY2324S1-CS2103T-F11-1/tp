@@ -6,6 +6,8 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.ccacommander.commons.util.ToStringBuilder;
+import seedu.ccacommander.model.attendance.Attendance;
+import seedu.ccacommander.model.attendance.UniqueAttendanceList;
 import seedu.ccacommander.model.event.Event;
 import seedu.ccacommander.model.event.UniqueEventList;
 import seedu.ccacommander.model.member.Member;
@@ -19,6 +21,7 @@ public class CcaCommander implements ReadOnlyCcaCommander {
 
     private final UniqueMemberList members;
     private final UniqueEventList events;
+    private final UniqueAttendanceList attendances;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -30,6 +33,7 @@ public class CcaCommander implements ReadOnlyCcaCommander {
     {
         members = new UniqueMemberList();
         events = new UniqueEventList();
+        attendances = new UniqueAttendanceList();
     }
 
     public CcaCommander() {}
@@ -61,6 +65,14 @@ public class CcaCommander implements ReadOnlyCcaCommander {
     }
 
     /**
+     * Replaces the contents of the attendance list with {@code attendances}.
+     * {@code attendances} must not contain duplicate attendances.
+     */
+    public void setAttendances(List<Attendance> attendances) {
+        this.attendances.setAttendances(attendances);
+    }
+
+    /**
      * Resets the existing data of this {@code CcaCommander} with {@code newData}.
      */
     public void resetData(ReadOnlyCcaCommander newData) {
@@ -68,6 +80,8 @@ public class CcaCommander implements ReadOnlyCcaCommander {
 
         setMembers(newData.getMemberList());
         setEvents(newData.getEventList());
+        setAttendances(newData.getAttendanceList());
+
     }
 
     // member-level operations
@@ -143,6 +157,23 @@ public class CcaCommander implements ReadOnlyCcaCommander {
     public void removeEvent(Event key) {
         events.remove(key);
     }
+    // attendance-level operations
+
+    /**
+     * Returns true if an attendance with the same identity as {@code attendance} exists in CcaCommander.
+     */
+    public boolean hasAttendance(Attendance attendance) {
+        requireNonNull(attendance);
+        return attendances.contains(attendance);
+    }
+
+    /**
+     * Adds an attendance to CcaCommander.
+     * The attendance must not already exist in CcaCommander.
+     */
+    public void createAttendance(Attendance a) {
+        attendances.createAttendance(a);
+    }
 
     // util methods
 
@@ -151,6 +182,7 @@ public class CcaCommander implements ReadOnlyCcaCommander {
         return new ToStringBuilder(this)
                 .add("members", members)
                 .add("events", events)
+                .add("attendances", attendances)
                 .toString();
     }
 
@@ -163,6 +195,10 @@ public class CcaCommander implements ReadOnlyCcaCommander {
     public ObservableList<Event> getEventList() {
         return events.asUnmodifiableObservableList();
     }
+    public ObservableList<Attendance> getAttendanceList() {
+        return attendances.asUnmodifiableObservableList();
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {

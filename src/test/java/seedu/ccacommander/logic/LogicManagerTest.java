@@ -176,6 +176,7 @@ public class LogicManagerTest {
         Member expectedMember = new MemberBuilder(AMY).withTags().build();
         ModelManager expectedModel = new ModelManager();
         expectedModel.createMember(expectedMember);
+        expectedModel.commit(String.format(CreateMemberCommand.MESSAGE_COMMIT, expectedMember.getName()));
         assertCommandFailure(createMemberCommand, CommandException.class, expectedMessage, expectedModel);
     }
 }

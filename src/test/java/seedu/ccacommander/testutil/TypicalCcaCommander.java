@@ -1,9 +1,11 @@
 package seedu.ccacommander.testutil;
 
+import static seedu.ccacommander.testutil.TypicalAttendances.getTypicalAttendance;
 import static seedu.ccacommander.testutil.TypicalEvents.getTypicalEvents;
 import static seedu.ccacommander.testutil.TypicalMembers.getTypicalMembers;
 
 import seedu.ccacommander.model.CcaCommander;
+import seedu.ccacommander.model.attendance.Attendance;
 import seedu.ccacommander.model.event.Event;
 import seedu.ccacommander.model.member.Member;
 
@@ -36,6 +38,18 @@ public class TypicalCcaCommander {
     }
 
     /**
+     * Returns a {@code CcaCommander} with only typical attendances.
+     */
+    public static CcaCommander getTypicalAttendanceCcaCommander() {
+        CcaCommander cc = new CcaCommander();
+        for (Attendance attendance: getTypicalAttendance()) {
+            cc.createAttendance(attendance);
+        }
+
+        return cc;
+    }
+
+    /**
      * Returns an {@code CcaCommander} with all the typical members and events.
      */
     public static CcaCommander getTypicalCcaCommander() {
@@ -46,6 +60,10 @@ public class TypicalCcaCommander {
 
         for (Event event: getTypicalEvents()) {
             cc.createEvent(event);
+        }
+
+        for (Attendance attendance: getTypicalAttendance()) {
+            cc.createAttendance(attendance);
         }
 
         return cc;
