@@ -9,6 +9,7 @@ import static seedu.ccacommander.commons.util.AppUtil.checkArgument;
  */
 public class Remark {
 
+    public static final Remark EMPTY_REMARK = new Remark();
     public static final String MESSAGE_CONSTRAINTS = "Remark can take any values, and it should not be blank.";
 
     /*
@@ -28,6 +29,10 @@ public class Remark {
         requireNonNull(remark);
         checkArgument(isValidRemark(remark), MESSAGE_CONSTRAINTS);
         value = remark;
+    }
+
+    private Remark() {
+        value = "";
     }
 
     /**

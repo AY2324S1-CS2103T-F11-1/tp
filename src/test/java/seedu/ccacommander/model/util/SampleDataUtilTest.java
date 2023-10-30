@@ -7,6 +7,7 @@ import static seedu.ccacommander.model.util.SampleDataUtil.getSampleMembers;
 import static seedu.ccacommander.model.util.SampleDataUtil.getTagSet;
 
 import java.util.Arrays;
+import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 
@@ -26,24 +27,42 @@ class SampleDataUtilTest {
     @Test
     void getSampleMembers_returnsValidMembers() {
         Member[] sampleMembers = getSampleMembers();
-        Member alex = new Member(new Name("Alex Yeoh"), new Gender("Male"), new Phone("87438807"),
-                new Email("alexyeoh@example.com"), new Address("Blk 30 Geylang Street 29, #06-40"),
+        Member alex = new Member(new Name("Alex Yeoh"),
+                new Gender("Male"),
+                Optional.of(new Phone("87438807")),
+                Optional.of(new Email("alexyeoh@example.com")),
+                Optional.of(new Address("Blk 30 Geylang Street 29, #06-40")),
                 getTagSet("friends"));
-        Member bernice = new Member(new Name("Bernice Yu"), new Gender("Female"), new Phone("99272758"),
-                new Email("berniceyu@example.com"), new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"),
+        Member bernice = new Member(new Name("Bernice Yu"),
+                new Gender("Female"),
+                Optional.of(new Phone("99272758")),
+                Optional.of(new Email("berniceyu@example.com")),
+                Optional.of(new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18")),
                 getTagSet("colleagues", "friends"));
-        Member charlotte = new Member(new Name("Charlotte Oliveiro"), new Gender("Female"), new Phone("93210283"),
-                        new Email("charlotte@example.com"), new Address("Blk 11 Ang Mo Kio Street 74, #11-04"),
-                        getTagSet("neighbours"));
-        Member david = new Member(new Name("David Li"), new Gender("Male"), new Phone("91031282"),
-                        new Email("lidavid@example.com"), new Address("Blk 436 Serangoon Gardens Street 26, #16-43"),
-                        getTagSet("family"));
-        Member irfan = new Member(new Name("Irfan Ibrahim"), new Gender("Male"), new Phone("92492021"),
-                        new Email("irfan@example.com"), new Address("Blk 47 Tampines Street 20, #17-35"),
-                        getTagSet("classmates"));
-        Member roy = new Member(new Name("Roy Balakrishnan"), new Gender("Male"), new Phone("92624417"),
-                        new Email("royb@example.com"), new Address("Blk 45 Aljunied Street 85, #11-31"),
-                        getTagSet("colleagues"));
+        Member charlotte = new Member(new Name("Charlotte Oliveiro"),
+                new Gender("Female"),
+                Optional.of(new Phone("93210283")),
+                Optional.of(new Email("charlotte@example.com")),
+                Optional.of(new Address("Blk 11 Ang Mo Kio Street 74, #11-04")),
+                getTagSet("neighbours"));
+        Member david = new Member(new Name("David Li"),
+                new Gender("Male"),
+                Optional.of(new Phone("91031282")),
+                Optional.of(new Email("lidavid@example.com")),
+                Optional.of(new Address("Blk 436 Serangoon Gardens Street 26, #16-43")),
+                getTagSet("family"));
+        Member irfan = new Member(new Name("Irfan Ibrahim"),
+                new Gender("Male"),
+                Optional.of(new Phone("92492021")),
+                Optional.of(new Email("irfan@example.com")),
+                Optional.of(new Address("Blk 47 Tampines Street 20, #17-35")),
+                getTagSet("classmates"));
+        Member roy = new Member(new Name("Roy Balakrishnan"),
+                new Gender("Male"),
+                Optional.of(new Phone("92624417")),
+                Optional.of(new Email("royb@example.com")),
+                Optional.of(new Address("Blk 45 Aljunied Street 85, #11-31")),
+                getTagSet("colleagues"));
         assertTrue(Arrays.stream(sampleMembers).anyMatch(alex::equals));
         assertTrue(Arrays.stream(sampleMembers).anyMatch(bernice::equals));
         assertTrue(Arrays.stream(sampleMembers).anyMatch(charlotte::equals));
@@ -84,23 +103,41 @@ class SampleDataUtilTest {
 
     @Test
     void getSampleCcaCommander_returnsValidMembersAndEvents() {
-        Member alex = new Member(new Name("Alex Yeoh"), new Gender("Male"), new Phone("87438807"),
-                new Email("alexyeoh@example.com"), new Address("Blk 30 Geylang Street 29, #06-40"),
+        Member alex = new Member(new Name("Alex Yeoh"),
+                new Gender("Male"),
+                Optional.of(new Phone("87438807")),
+                Optional.of(new Email("alexyeoh@example.com")),
+                Optional.of(new Address("Blk 30 Geylang Street 29, #06-40")),
                 getTagSet("friends"));
-        Member bernice = new Member(new Name("Bernice Yu"), new Gender("Female"), new Phone("99272758"),
-                new Email("berniceyu@example.com"), new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"),
+        Member bernice = new Member(new Name("Bernice Yu"),
+                new Gender("Female"),
+                Optional.of(new Phone("99272758")),
+                Optional.of(new Email("berniceyu@example.com")),
+                Optional.of(new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18")),
                 getTagSet("colleagues", "friends"));
-        Member charlotte = new Member(new Name("Charlotte Oliveiro"), new Gender("Female"), new Phone("93210283"),
-                new Email("charlotte@example.com"), new Address("Blk 11 Ang Mo Kio Street 74, #11-04"),
+        Member charlotte = new Member(new Name("Charlotte Oliveiro"),
+                new Gender("Female"),
+                Optional.of(new Phone("93210283")),
+                Optional.of(new Email("charlotte@example.com")),
+                Optional.of(new Address("Blk 11 Ang Mo Kio Street 74, #11-04")),
                 getTagSet("neighbours"));
-        Member david = new Member(new Name("David Li"), new Gender("Male"), new Phone("91031282"),
-                new Email("lidavid@example.com"), new Address("Blk 436 Serangoon Gardens Street 26, #16-43"),
+        Member david = new Member(new Name("David Li"),
+                new Gender("Male"),
+                Optional.of(new Phone("91031282")),
+                Optional.of(new Email("lidavid@example.com")),
+                Optional.of(new Address("Blk 436 Serangoon Gardens Street 26, #16-43")),
                 getTagSet("family"));
-        Member irfan = new Member(new Name("Irfan Ibrahim"), new Gender("Male"), new Phone("92492021"),
-                new Email("irfan@example.com"), new Address("Blk 47 Tampines Street 20, #17-35"),
+        Member irfan = new Member(new Name("Irfan Ibrahim"),
+                new Gender("Male"),
+                Optional.of(new Phone("92492021")),
+                Optional.of(new Email("irfan@example.com")),
+                Optional.of(new Address("Blk 47 Tampines Street 20, #17-35")),
                 getTagSet("classmates"));
-        Member roy = new Member(new Name("Roy Balakrishnan"), new Gender("Male"), new Phone("92624417"),
-                new Email("royb@example.com"), new Address("Blk 45 Aljunied Street 85, #11-31"),
+        Member roy = new Member(new Name("Roy Balakrishnan"),
+                new Gender("Male"),
+                Optional.of(new Phone("92624417")),
+                Optional.of(new Email("royb@example.com")),
+                Optional.of(new Address("Blk 45 Aljunied Street 85, #11-31")),
                 getTagSet("colleagues"));
         Event aurora = new Event(new Name("Aurora Borealis"),
                 new EventDate("2023-11-30"), new Location("Greenland"),

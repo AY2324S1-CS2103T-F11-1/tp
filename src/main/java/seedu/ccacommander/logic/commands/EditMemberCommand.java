@@ -114,7 +114,8 @@ public class EditMemberCommand extends Command {
         Address updatedAddress = editMemberDescriptor.getAddress().orElse(memberToEdit.getAddress());
         Set<Tag> updatedTags = editMemberDescriptor.getTags().orElse(memberToEdit.getTags());
 
-        return new Member(updatedName, updatedGender, updatedPhone, updatedEmail, updatedAddress, updatedTags);
+        return new Member(updatedName, updatedGender, Optional.of(updatedPhone),
+                Optional.of(updatedEmail), Optional.of(updatedAddress), updatedTags);
     }
 
     @Override

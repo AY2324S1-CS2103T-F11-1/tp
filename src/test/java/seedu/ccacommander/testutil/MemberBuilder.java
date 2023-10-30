@@ -1,6 +1,7 @@
 package seedu.ccacommander.testutil;
 
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 import seedu.ccacommander.model.member.Address;
@@ -79,10 +80,26 @@ public class MemberBuilder {
     }
 
     /**
+     * Sets the {@code Address} of the {@code Member} to an empty address.
+     */
+    public MemberBuilder withAddress() {
+        this.address = null;
+        return this;
+    }
+
+    /**
      * Sets the {@code Phone} of the {@code Member} that we are building.
      */
     public MemberBuilder withPhone(String phone) {
         this.phone = new Phone(phone);
+        return this;
+    }
+
+    /**
+     * Sets the {@Phone} of the {@code Member} that we are building to null.
+     */
+    public MemberBuilder withPhone() {
+        this.phone = null;
         return this;
     }
 
@@ -95,6 +112,14 @@ public class MemberBuilder {
     }
 
     /**
+     * Sets the {@code Email} of the {@code Member} that we are building to null.
+     */
+    public MemberBuilder withEmail() {
+        this.email = null;
+        return this;
+    }
+
+    /**
      * Sets the {@code Gender} of the {@code Member} that we are building.
      */
     public MemberBuilder withGender(String gender) {
@@ -102,8 +127,12 @@ public class MemberBuilder {
         return this;
     }
 
+    /**
+     * Builds the member and returns it.
+     */
     public Member build() {
-        return new Member(name, gender, phone, email, address, tags);
+        return new Member(name, gender, Optional.ofNullable(phone),
+                Optional.ofNullable(email), Optional.ofNullable(address), tags);
     }
 
 }

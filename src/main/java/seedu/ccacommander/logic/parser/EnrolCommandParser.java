@@ -6,6 +6,7 @@ import static seedu.ccacommander.logic.parser.CliSyntax.PREFIX_HOURS;
 import static seedu.ccacommander.logic.parser.CliSyntax.PREFIX_MEMBER;
 import static seedu.ccacommander.logic.parser.CliSyntax.PREFIX_REMARK;
 
+import java.util.Optional;
 import java.util.stream.Stream;
 
 import seedu.ccacommander.commons.core.index.Index;
@@ -28,7 +29,7 @@ public class EnrolCommandParser implements Parser<EnrolCommand> {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_MEMBER, PREFIX_EVENT, PREFIX_HOURS, PREFIX_REMARK);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_MEMBER, PREFIX_EVENT, PREFIX_HOURS, PREFIX_REMARK)
+        if (!arePrefixesPresent(argMultimap, PREFIX_MEMBER, PREFIX_EVENT)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EnrolCommand.MESSAGE_USAGE));
         }
@@ -36,10 +37,10 @@ public class EnrolCommandParser implements Parser<EnrolCommand> {
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_MEMBER, PREFIX_EVENT, PREFIX_HOURS, PREFIX_REMARK);
         Index memberIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_MEMBER).get());
         Index eventIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_EVENT).get());
-        Hours hours = ParserUtil.parseHours(argMultimap.getValue(PREFIX_HOURS).get());
-        Remark remark = ParserUtil.parseRemark(argMultimap.getValue(PREFIX_REMARK).get());
+        Hours hours = getParsedHour(argMultimap);
+        Remark remark = getParsedRemark(argMultimap);
 
-        return new EnrolCommand(memberIndex, eventIndex, hours, remark);
+        return new EnrolCommand(memberIndex, eventIndex, Optional.ofNullable(hours), Optional.ofNullable(remark));
     }
 
     /**
@@ -48,6 +49,22 @@ public class EnrolCommandParser implements Parser<EnrolCommand> {
      */
     private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
         return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
+    }
+
+    private Hours getParsedHour(ArgumentMultimap argMultimap) throws ParseException {
+        if (argMultimap.getValue(PREFIX_HOURS).isPresent()) {
+            return ParserUtil.parseHours(argMultimap.getValue(PREFIX_HOURS).get());
+        } else {
+            return null;
+        }
+    }
+
+    private Remark getParsedRemark(ArgumentMultimap argMultimap) throws ParseException {
+        if (argMultimap.getValue(PREFIX_REMARK).isPresent()) {
+            return ParserUtil.parseRemark(argMultimap.getValue(PREFIX_REMARK).get());
+        } else {
+            return null;
+        }
     }
 
 }

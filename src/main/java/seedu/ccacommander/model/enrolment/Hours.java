@@ -9,6 +9,7 @@ import static seedu.ccacommander.commons.util.AppUtil.checkArgument;
  */
 public class Hours {
 
+    public static final Hours EMPTY_HOURS = new Hours("0");
     public static final String MESSAGE_CONSTRAINTS =
             "Hours should be a non-negative integer up to 2147483647 and it should not be blank";
 

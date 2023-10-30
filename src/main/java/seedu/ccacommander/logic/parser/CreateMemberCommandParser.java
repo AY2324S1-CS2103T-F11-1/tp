@@ -8,6 +8,7 @@ import static seedu.ccacommander.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.ccacommander.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.ccacommander.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Stream;
 
@@ -36,7 +37,7 @@ public class CreateMemberCommandParser implements Parser<CreateMemberCommand> {
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_GENDER,
                         PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_GENDER, PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_EMAIL)
+        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_GENDER)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, CreateMemberCommand.MESSAGE_USAGE));
         }
@@ -45,12 +46,13 @@ public class CreateMemberCommandParser implements Parser<CreateMemberCommand> {
                 PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS);
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         Gender gender = ParserUtil.parseGender(argMultimap.getValue(PREFIX_GENDER).get());
-        Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
-        Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
-        Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
+        Phone phone = getParsedPhone(argMultimap);
+        Email email = getParsedEmail(argMultimap);
+        Address address = getParsedAddress(argMultimap);
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
-        Member member = new Member(name, gender, phone, email, address, tagList);
+        Member member = new Member(name, gender, Optional.ofNullable(phone),
+                Optional.ofNullable(email), Optional.ofNullable(address), tagList);
 
         return new CreateMemberCommand(member);
     }
@@ -61,6 +63,30 @@ public class CreateMemberCommandParser implements Parser<CreateMemberCommand> {
      */
     private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
         return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
+    }
+
+    private Phone getParsedPhone(ArgumentMultimap argMultimap) throws ParseException {
+        if (argMultimap.getValue(PREFIX_PHONE).isPresent()) {
+            return ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
+        } else {
+            return null;
+        }
+    }
+
+    private Email getParsedEmail(ArgumentMultimap argMultimap) throws ParseException {
+        if (argMultimap.getValue(PREFIX_EMAIL).isPresent()) {
+            return ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
+        } else {
+            return null;
+        }
+    }
+
+    private Address getParsedAddress(ArgumentMultimap argMultimap) throws ParseException {
+        if (argMultimap.getValue(PREFIX_ADDRESS).isPresent()) {
+            return ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
+        } else {
+            return null;
+        }
     }
 
 }

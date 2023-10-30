@@ -1,5 +1,7 @@
 package seedu.ccacommander.storage;
 
+import java.util.Optional;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -71,21 +73,22 @@ class JsonAdaptedEnrolment {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     Hours.class.getSimpleName()));
         }
-        if (!Hours.isValidHours(hours)) {
+        if (!hours.isEmpty() && !Hours.isValidHours(hours)) {
             throw new IllegalValueException(Hours.MESSAGE_CONSTRAINTS);
         }
-        final Hours modelHours = new Hours(hours);
+        final Hours modelHours = hours.isEmpty() ? null : new Hours(hours);
 
         if (remark == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     Remark.class.getSimpleName()));
         }
-        if (!Remark.isValidRemark(remark)) {
+        if (!remark.isEmpty() && !Remark.isValidRemark(remark)) {
             throw new IllegalValueException(Remark.MESSAGE_CONSTRAINTS);
         }
-        final Remark modelRemark = new Remark(remark);
+        final Remark modelRemark = remark.isEmpty() ? null : new Remark(remark);
 
-        return new Enrolment(modelMemberName, modelEventName, modelHours, modelRemark);
+        return new Enrolment(modelMemberName, modelEventName,
+                Optional.ofNullable(modelHours), Optional.ofNullable(modelRemark));
     }
 
 }

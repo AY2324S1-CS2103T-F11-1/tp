@@ -151,10 +151,34 @@ public class CreateMemberCommandParserTest {
     @Test
     public void parse_optionalFieldsMissing_success() {
         // zero tags
-        Member expectedMember = new MemberBuilder(AMY).withTags().build();
+        Member expectedMemberNoTags = new MemberBuilder(AMY).withTags().build();
         assertParseSuccess(parser, NAME_DESC_AMY + GENDER_DESC_AMY + PHONE_DESC_AMY
                         + EMAIL_DESC_AMY + ADDRESS_DESC_AMY,
-                new CreateMemberCommand(expectedMember));
+                new CreateMemberCommand(expectedMemberNoTags));
+
+        // missing phone
+        Member expectedMemberNoPhone = new MemberBuilder(AMY).withPhone().build();
+        assertParseSuccess(parser, NAME_DESC_AMY + GENDER_DESC_AMY
+                        + EMAIL_DESC_AMY + ADDRESS_DESC_AMY + TAG_DESC_FRIEND,
+                new CreateMemberCommand(expectedMemberNoPhone));
+
+        // missing email
+        Member expectedMemberNoEmail = new MemberBuilder(AMY).withEmail().build();
+        assertParseSuccess(parser, NAME_DESC_AMY + GENDER_DESC_AMY + PHONE_DESC_AMY
+                        + ADDRESS_DESC_AMY + TAG_DESC_FRIEND,
+                new CreateMemberCommand(expectedMemberNoEmail));
+
+        // missing address
+        Member expectedMemberNoAddress = new MemberBuilder(AMY).withAddress().build();
+        assertParseSuccess(parser, NAME_DESC_AMY + GENDER_DESC_AMY + PHONE_DESC_AMY
+                        + EMAIL_DESC_AMY + TAG_DESC_FRIEND,
+                new CreateMemberCommand(expectedMemberNoAddress));
+
+        // missing all optional fields
+        Member expectedMemberNoOptionalFields = new MemberBuilder(AMY).withPhone()
+                .withEmail().withAddress().withTags().build();
+        assertParseSuccess(parser, NAME_DESC_AMY + GENDER_DESC_AMY,
+                new CreateMemberCommand(expectedMemberNoOptionalFields));
     }
 
     @Test

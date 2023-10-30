@@ -3,6 +3,7 @@ package seedu.ccacommander.model.enrolment;
 import static seedu.ccacommander.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Objects;
+import java.util.Optional;
 
 import seedu.ccacommander.commons.util.ToStringBuilder;
 import seedu.ccacommander.model.shared.Name;
@@ -18,13 +19,13 @@ public class Enrolment {
     private final Name eventName;
 
     // Data fields
-    private final Hours hours;
-    private final Remark remark;
+    private final Optional<Hours> hours;
+    private final Optional<Remark> remark;
 
     /**
      * Every field must be present and not null.
      */
-    public Enrolment(Name memberName, Name eventName, Hours hours, Remark remark) {
+    public Enrolment(Name memberName, Name eventName, Optional<Hours> hours, Optional<Remark> remark) {
         requireAllNonNull(memberName, eventName, hours, remark);
         this.memberName = memberName;
         this.eventName = eventName;
@@ -41,11 +42,11 @@ public class Enrolment {
     }
 
     public Hours getHours() {
-        return hours;
+        return hours.orElse(Hours.EMPTY_HOURS);
     }
 
     public Remark getRemark() {
-        return remark;
+        return remark.orElse(Remark.EMPTY_REMARK);
     }
 
     public String getMemberAndEventEnrolment() {
@@ -99,8 +100,8 @@ public class Enrolment {
         return new ToStringBuilder(this)
                 .add("member name", memberName)
                 .add("event name", eventName)
-                .add("hours", hours)
-                .add("remark", remark)
+                .add("hours", hours.orElse(Hours.EMPTY_HOURS))
+                .add("remark", remark.orElse(Remark.EMPTY_REMARK))
                 .toString();
     }
 }

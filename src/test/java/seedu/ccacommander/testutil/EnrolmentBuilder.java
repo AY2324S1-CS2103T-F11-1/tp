@@ -1,9 +1,12 @@
 package seedu.ccacommander.testutil;
 
+import java.util.Optional;
+
 import seedu.ccacommander.model.enrolment.Enrolment;
 import seedu.ccacommander.model.enrolment.Hours;
 import seedu.ccacommander.model.enrolment.Remark;
 import seedu.ccacommander.model.shared.Name;
+
 
 /**
  * A utility class to help with building Enrolment objects.
@@ -65,14 +68,31 @@ public class EnrolmentBuilder {
     }
 
     /**
+     * Sets the {@code Hours} of the {@code Enrolment} that we are building to an empty hour.
+     */
+    public EnrolmentBuilder withHours() {
+        this.hours = null;
+        return this;
+    }
+
+    /**
      * Sets the {@code Remark} of the {@code Enrolment} that we are building.
      */
     public EnrolmentBuilder withRemark(String remark) {
         this.remark = new Remark(remark);
         return this;
     }
+
+    /**
+     * Sets the {@code Remark} of the {@code Enrolment} that we are building to an empty remark.
+     */
+    public EnrolmentBuilder withRemark() {
+        this.remark = null;
+        return this;
+    }
+
     public Enrolment build() {
-        return new Enrolment(memberName, eventName, hours, remark);
+        return new Enrolment(memberName, eventName, Optional.ofNullable(hours), Optional.ofNullable(remark));
     }
 
 }

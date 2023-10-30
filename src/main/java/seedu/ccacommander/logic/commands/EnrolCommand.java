@@ -7,6 +7,7 @@ import static seedu.ccacommander.logic.parser.CliSyntax.PREFIX_MEMBER;
 import static seedu.ccacommander.logic.parser.CliSyntax.PREFIX_REMARK;
 
 import java.util.List;
+import java.util.Optional;
 
 import seedu.ccacommander.commons.core.index.Index;
 import seedu.ccacommander.commons.util.ToStringBuilder;
@@ -48,13 +49,13 @@ public class EnrolCommand extends Command {
 
     private final Index memberIndex;
     private final Index eventIndex;
-    private final Hours hours;
-    private final Remark remark;
+    private final Optional<Hours> hours;
+    private final Optional<Remark> remark;
 
     /**
      * Creates an EnrolCommand to add the specified {@code Enrolment}
      */
-    public EnrolCommand(Index memberIndex, Index eventIndex, Hours hours, Remark remark) {
+    public EnrolCommand(Index memberIndex, Index eventIndex, Optional<Hours> hours, Optional<Remark> remark) {
         requireNonNull(memberIndex);
         requireNonNull(eventIndex);
         requireNonNull(hours);

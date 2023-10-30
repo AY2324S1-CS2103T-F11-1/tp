@@ -9,6 +9,7 @@ import static seedu.ccacommander.commons.util.AppUtil.checkArgument;
  */
 public class Address {
 
+    public static final Address EMPTY_ADRESS = new Address();
     public static final String MESSAGE_CONSTRAINTS = "Addresses can take any values, and it should not be blank";
 
     /*
@@ -28,6 +29,10 @@ public class Address {
         requireNonNull(address);
         checkArgument(isValidAddress(address), MESSAGE_CONSTRAINTS);
         value = address;
+    }
+
+    private Address() {
+        value = "";
     }
 
     /**
