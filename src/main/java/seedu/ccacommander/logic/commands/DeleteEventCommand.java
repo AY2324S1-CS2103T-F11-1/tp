@@ -10,6 +10,8 @@ import seedu.ccacommander.logic.Messages;
 import seedu.ccacommander.logic.commands.exceptions.CommandException;
 import seedu.ccacommander.model.Model;
 import seedu.ccacommander.model.event.Event;
+import seedu.ccacommander.ui.EventListPanel;
+import seedu.ccacommander.ui.MemberListPanel;
 
 /**
  * Deletes an event identified using its displayed index from CcaCommander.
@@ -41,6 +43,9 @@ public class DeleteEventCommand extends Command {
         Event eventToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deleteEvent(eventToDelete);
         model.commit(String.format(MESSAGE_COMMIT, eventToDelete.getName()));
+
+        MemberListPanel.setIsViewEventCommand(false);
+        EventListPanel.setIsViewMemberCommand(false);
         return new CommandResult(String.format(MESSAGE_DELETE_EVENT_SUCCESS, Messages.format(eventToDelete)));
     }
 

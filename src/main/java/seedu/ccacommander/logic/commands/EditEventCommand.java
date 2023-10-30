@@ -6,6 +6,7 @@ import static seedu.ccacommander.logic.parser.CliSyntax.PREFIX_LOCATION;
 import static seedu.ccacommander.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.ccacommander.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.ccacommander.model.Model.PREDICATE_SHOW_ALL_EVENTS;
+import static seedu.ccacommander.model.Model.PREDICATE_SHOW_ALL_MEMBERS;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -25,6 +26,8 @@ import seedu.ccacommander.model.event.EventDate;
 import seedu.ccacommander.model.event.Location;
 import seedu.ccacommander.model.shared.Name;
 import seedu.ccacommander.model.tag.Tag;
+import seedu.ccacommander.ui.EventListPanel;
+import seedu.ccacommander.ui.MemberListPanel;
 
 /**
  * Edits the details of an existing event in CcaCommander.
@@ -83,7 +86,11 @@ public class EditEventCommand extends Command {
 
         model.setEvent(eventToEdit, editedEvent);
         model.updateFilteredEventList(PREDICATE_SHOW_ALL_EVENTS);
+        model.updateFilteredMemberList(PREDICATE_SHOW_ALL_MEMBERS);
         model.commit(String.format(MESSAGE_COMMIT, editedEvent.getName()));
+
+        MemberListPanel.setIsViewEventCommand(false);
+        EventListPanel.setIsViewMemberCommand(false);
         return new CommandResult(String.format(MESSAGE_EDIT_EVENT_SUCCESS, Messages.format(editedEvent)));
     }
 

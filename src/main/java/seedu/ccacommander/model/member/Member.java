@@ -9,6 +9,8 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.ccacommander.commons.util.ToStringBuilder;
+import seedu.ccacommander.model.enrolment.Hours;
+import seedu.ccacommander.model.enrolment.Remark;
 import seedu.ccacommander.model.shared.Name;
 import seedu.ccacommander.model.tag.Tag;
 
@@ -27,6 +29,8 @@ public class Member {
     // Data fields
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
+    private Hours hours;
+    private Remark remark;
 
     /**
      * Every field must be present and not null.
@@ -40,8 +44,9 @@ public class Member {
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
+        this.hours = new Hours("0");
+        this.remark = new Remark("None");
     }
-
 
     public Name getName() {
         return name;
@@ -63,6 +68,12 @@ public class Member {
         return address;
     }
 
+    public Hours getHours() {
+        return hours;
+    }
+    public Remark getRemark() {
+        return remark;
+    }
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
@@ -70,7 +81,12 @@ public class Member {
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
     }
-
+    public void setHours(Hours hours) {
+        this.hours = hours;
+    }
+    public void setRemark(Remark remark) {
+        this.remark = remark;
+    }
     /**
      * Returns true if both members have the same name.
      * This defines a weaker notion of equality between two members.

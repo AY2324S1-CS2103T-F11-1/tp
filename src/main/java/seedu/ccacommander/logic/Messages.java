@@ -20,6 +20,7 @@ public class Messages {
     public static final String MESSAGE_MEMBERS_LISTED_OVERVIEW = "%1$d members listed!";
     public static final String MESSAGE_EVENTS_LISTED_OVERVIEW = "%1$d events listed!";
     public static final String MESSAGE_INVALID_EVENT_DISPLAYED_INDEX = "The event index provided is invalid";
+
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
 
@@ -63,7 +64,7 @@ public class Messages {
                 .append(" | Location: ")
                 .append(event.getLocation())
                 .append(" | Tags: ");
-        event.getTags().forEach(builder::append);
+        event.getTags().forEach(tag -> builder.append(tag).append(" "));
         return builder.toString();
     }
 

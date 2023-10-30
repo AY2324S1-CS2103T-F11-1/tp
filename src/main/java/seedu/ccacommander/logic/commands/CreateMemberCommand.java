@@ -13,6 +13,8 @@ import seedu.ccacommander.logic.Messages;
 import seedu.ccacommander.logic.commands.exceptions.CommandException;
 import seedu.ccacommander.model.Model;
 import seedu.ccacommander.model.member.Member;
+import seedu.ccacommander.ui.EventListPanel;
+import seedu.ccacommander.ui.MemberListPanel;
 
 /**
  * Adds a member to CcaCommander.
@@ -62,6 +64,9 @@ public class CreateMemberCommand extends Command {
 
         model.createMember(toAdd);
         model.commit(String.format(MESSAGE_COMMIT, toAdd.getName()));
+
+        MemberListPanel.setIsViewEventCommand(false);
+        EventListPanel.setIsViewMemberCommand(false);
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
     }
 

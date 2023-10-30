@@ -14,6 +14,7 @@ import seedu.ccacommander.model.event.Event;
  * Panel containing the list of events.
  */
 public class EventListPanel extends UiPart<Region> {
+    private static boolean isViewMemberCommand = false;
     private static final String FXML = "EventListPanel.fxml";
     private final Logger logger = LogsCenter.getLogger(EventListPanel.class);
 
@@ -28,6 +29,9 @@ public class EventListPanel extends UiPart<Region> {
         eventListView.setItems(eventList);
         eventListView.setCellFactory(listView -> new EventListViewCell());
     }
+    public static void setIsViewMemberCommand(boolean isViewMemberCommand) {
+        EventListPanel.isViewMemberCommand = isViewMemberCommand;
+    }
 
     /**
      * Custom {@code ListCell} that displays the graphics of a {@code Event} using a {@code EventCard}.
@@ -41,7 +45,7 @@ public class EventListPanel extends UiPart<Region> {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new EventCard(event, getIndex() + 1).getRoot());
+                setGraphic(new EventCard(event, getIndex() + 1, isViewMemberCommand).getRoot());
             }
         }
     }

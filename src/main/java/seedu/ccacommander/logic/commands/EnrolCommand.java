@@ -19,6 +19,8 @@ import seedu.ccacommander.model.enrolment.Remark;
 import seedu.ccacommander.model.event.Event;
 import seedu.ccacommander.model.member.Member;
 import seedu.ccacommander.model.shared.Name;
+import seedu.ccacommander.ui.EventListPanel;
+import seedu.ccacommander.ui.MemberListPanel;
 
 /**
  * Enrols a member to an event in CcaCommander.
@@ -92,6 +94,8 @@ public class EnrolCommand extends Command {
 
         model.createEnrolment(toAdd);
         model.commit(String.format(MESSAGE_COMMIT, toAdd.getMemberAndEventEnrolment()));
+        MemberListPanel.setIsViewEventCommand(false);
+        EventListPanel.setIsViewMemberCommand(false);
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
     }
 

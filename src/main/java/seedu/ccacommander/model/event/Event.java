@@ -8,6 +8,8 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.ccacommander.commons.util.ToStringBuilder;
+import seedu.ccacommander.model.enrolment.Hours;
+import seedu.ccacommander.model.enrolment.Remark;
 import seedu.ccacommander.model.shared.Name;
 import seedu.ccacommander.model.tag.Tag;
 
@@ -24,6 +26,9 @@ public class Event {
     private final Location location;
     private final EventDate eventDate;
 
+    // Enrolment data fields
+    private Hours hours;
+    private Remark remark;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
@@ -35,6 +40,8 @@ public class Event {
         this.eventDate = eventDate;
         this.location = location;
         this.tags.addAll(tags);
+        this.hours = new Hours("0");
+        this.remark = new Remark("None");
     }
 
     public Name getName() {
@@ -49,6 +56,19 @@ public class Event {
         return this.eventDate;
     }
 
+    public Hours getHours() {
+        return this.hours;
+    }
+    public Remark getRemark() {
+        return this.remark;
+    }
+    public void setHours(Hours hours) {
+        this.hours = hours;
+    }
+
+    public void setRemark(Remark remark) {
+        this.remark = remark;
+    }
 
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}

@@ -6,6 +6,8 @@ import seedu.ccacommander.commons.util.ToStringBuilder;
 import seedu.ccacommander.logic.Messages;
 import seedu.ccacommander.model.Model;
 import seedu.ccacommander.model.event.EventNameContainsKeywordsPredicate;
+import seedu.ccacommander.ui.EventListPanel;
+import seedu.ccacommander.ui.MemberListPanel;
 
 /**
  * Finds and lists all events in CcaCommander whose name contains any of the argument keywords.
@@ -30,6 +32,10 @@ public class FindEventCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.updateFilteredEventList(predicate);
+        model.updateFilteredMemberList(Model.PREDICATE_SHOW_ALL_MEMBERS);
+        MemberListPanel.setIsViewEventCommand(false);
+        EventListPanel.setIsViewMemberCommand(false);
+
         return new CommandResult(
                 String.format(Messages.MESSAGE_EVENTS_LISTED_OVERVIEW, model.getFilteredEventList().size()));
     }

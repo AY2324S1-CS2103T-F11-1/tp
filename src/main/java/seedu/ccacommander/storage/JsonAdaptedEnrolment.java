@@ -15,7 +15,6 @@ import seedu.ccacommander.model.shared.Name;
 class JsonAdaptedEnrolment {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Enrolment's %s field is missing!";
-
     private final String memberName;
     private final String eventName;
     private final String hours;
