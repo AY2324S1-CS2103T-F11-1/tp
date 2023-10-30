@@ -191,6 +191,13 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void setEnrolment(Enrolment target, Enrolment editedEnrolment) {
+        requireAllNonNull(target, editedEnrolment);
+
+        versionedCcaCommander.setEnrolment(target, editedEnrolment);
+    }
+
+    @Override
     public void commit(String commitMessage) {
         versionedCcaCommander.commit(commitMessage);
     }

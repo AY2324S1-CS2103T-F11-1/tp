@@ -148,17 +148,17 @@ public class EnrolCommandTest {
         }
 
         @Override
-        public void createMember(Member member) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
         public void setCcaCommander(ReadOnlyCcaCommander newData) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public ReadOnlyCcaCommander getCcaCommander() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void createMember(Member member) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -210,6 +210,10 @@ public class EnrolCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
+        @Override
+        public void setEnrolment(Enrolment enrolment, Enrolment editedEnrolment) {
+            throw new AssertionError("This method should not be called.");
+        }
         @Override
         public ObservableList<Member> getFilteredMemberList() {
             throw new AssertionError("This method should not be called.");

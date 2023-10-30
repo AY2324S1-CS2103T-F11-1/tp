@@ -23,6 +23,8 @@ public class Messages {
     public static final String MESSAGE_INVALID_MEMBER_AND_EVENT_DISPLAYED_INDEX = "The member and event indexes "
             + "provided are both invalid";
     public static final String MESSAGE_ENROLMENT_NOT_FOUND = "The member is not enroled to the event!";
+    public static final String MESSAGE_ENROLMENT_DOES_NOT_EXIST =
+            "Member at index %1$d is not enrolled in event at index %2$d.";
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
 

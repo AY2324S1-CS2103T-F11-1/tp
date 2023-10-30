@@ -186,6 +186,10 @@ public class CreateEventCommandTest {
         }
 
         @Override
+        public void setEnrolment(Enrolment enrolment, Enrolment editedEnrolment) {
+            throw new AssertionError("This method should not be called.");
+        }
+        @Override
         public ObservableList<Member> getFilteredMemberList() {
             throw new AssertionError("This method should not be called.");
         }

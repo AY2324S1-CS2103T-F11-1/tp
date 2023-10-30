@@ -27,12 +27,14 @@ import seedu.ccacommander.logic.commands.exceptions.CommandException;
 import seedu.ccacommander.model.CcaCommander;
 import seedu.ccacommander.model.Model;
 import seedu.ccacommander.model.enrolment.Enrolment;
+import seedu.ccacommander.model.enrolment.EnrolmentExistsPredicate;
 import seedu.ccacommander.model.enrolment.Hours;
 import seedu.ccacommander.model.enrolment.Remark;
 import seedu.ccacommander.model.event.Event;
 import seedu.ccacommander.model.event.EventNameContainsKeywordsPredicate;
 import seedu.ccacommander.model.member.Member;
 import seedu.ccacommander.model.member.MemberNameContainsKeywordsPredicate;
+import seedu.ccacommander.testutil.EditEnrolmentDescriptorBuilder;
 import seedu.ccacommander.testutil.EditEventDescriptorBuilder;
 import seedu.ccacommander.testutil.EditMemberDescriptorBuilder;
 
@@ -145,6 +147,23 @@ public class CommandTestUtil {
                 .withDate(VALID_DATE_BOXING)
                 .withTags(VALID_TAG_BOXING).build();
     }
+
+    public static final EditEnrolmentCommand.EditEnrolmentDescriptor DESC_AMY_AURORA;
+    public static final EditEnrolmentCommand.EditEnrolmentDescriptor DESC_BOB_BOXING;
+
+    static {
+        DESC_AMY_AURORA = new EditEnrolmentDescriptorBuilder()
+                .withMemberName(VALID_NAME_AMY)
+                .withEventName(VALID_NAME_AURORA)
+                .withHours(VALID_HOURS_AURORA)
+                .withRemark(VALID_REMARK_AURORA).build();
+        DESC_BOB_BOXING = new EditEnrolmentDescriptorBuilder()
+                .withMemberName(VALID_NAME_BOB)
+                .withEventName(VALID_NAME_BOXING)
+                .withHours(VALID_HOURS_BOXING)
+                .withRemark(VALID_REMARK_BOXING).build();
+    }
+
     /**
      * Executes the given {@code command}, confirms that <br>
      * - the returned {@link CommandResult} matches {@code expectedCommandResult} <br>
@@ -218,5 +237,18 @@ public class CommandTestUtil {
         model.updateFilteredEventList(new EventNameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
 
         assertEquals(1, model.getFilteredEventList().size());
+    }
+
+    /**
+     * Updates {@code model}'s filtered list to show only the enrolment at the given {@code targetIndex} in the
+     * {@code model}'s CcaCommander.
+     */
+    public static void showEnrolmentAtIndex(Model model, Index targetIndex) {
+        assertTrue(targetIndex.getZeroBased() < model.getFilteredEnrolmentList().size());
+
+        Enrolment enrolment = model.getFilteredEnrolmentList().get(targetIndex.getZeroBased());
+        model.updateFilteredEnrolmentList(new EnrolmentExistsPredicate(enrolment));
+
+        assertEquals(1, model.getFilteredEnrolmentList().size());
     }
 }
