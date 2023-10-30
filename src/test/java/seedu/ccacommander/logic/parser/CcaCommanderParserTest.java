@@ -5,8 +5,10 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.ccacommander.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.ccacommander.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.ccacommander.testutil.Assert.assertThrows;
+import static seedu.ccacommander.testutil.TypicalHours.HOURS_ZERO;
 import static seedu.ccacommander.testutil.TypicalIndexes.INDEX_FIRST_EVENT;
 import static seedu.ccacommander.testutil.TypicalIndexes.INDEX_FIRST_MEMBER;
+import static seedu.ccacommander.testutil.TypicalRemarks.REMARK_ONE;
 
 import java.util.Arrays;
 import java.util.List;
@@ -23,6 +25,7 @@ import seedu.ccacommander.logic.commands.EditEventCommand;
 import seedu.ccacommander.logic.commands.EditEventCommand.EditEventDescriptor;
 import seedu.ccacommander.logic.commands.EditMemberCommand;
 import seedu.ccacommander.logic.commands.EditMemberCommand.EditMemberDescriptor;
+import seedu.ccacommander.logic.commands.EnrolCommand;
 import seedu.ccacommander.logic.commands.ExitCommand;
 import seedu.ccacommander.logic.commands.FindEventCommand;
 import seedu.ccacommander.logic.commands.FindMemberCommand;
@@ -30,6 +33,7 @@ import seedu.ccacommander.logic.commands.HelpCommand;
 import seedu.ccacommander.logic.commands.ListCommand;
 import seedu.ccacommander.logic.commands.RedoCommand;
 import seedu.ccacommander.logic.commands.UndoCommand;
+import seedu.ccacommander.logic.commands.UnenrolCommand;
 import seedu.ccacommander.logic.parser.exceptions.ParseException;
 import seedu.ccacommander.model.event.Event;
 import seedu.ccacommander.model.event.EventNameContainsKeywordsPredicate;
@@ -121,6 +125,26 @@ public class CcaCommanderParserTest {
         FindEventCommand command = (FindEventCommand) parser.parseCommand(
                 FindEventCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
         assertEquals(new FindEventCommand(new EventNameContainsKeywordsPredicate(keywords)), command);
+    }
+
+    @Test
+    public void parseCommand_enrol() throws Exception {
+        EnrolCommand command = (EnrolCommand) parser.parseCommand(
+                EnrolCommand.COMMAND_WORD
+                        + " m/" + INDEX_FIRST_MEMBER.getOneBased()
+                        + " e/" + INDEX_FIRST_EVENT.getOneBased()
+                        + " h/" + HOURS_ZERO.toString()
+                        + " r/" + REMARK_ONE.toString());
+        assertEquals(new EnrolCommand(INDEX_FIRST_MEMBER, INDEX_FIRST_EVENT, HOURS_ZERO, REMARK_ONE), command);
+    }
+
+    @Test
+    public void parseCommand_unenrol() throws Exception {
+        UnenrolCommand command = (UnenrolCommand) parser.parseCommand(
+                UnenrolCommand.COMMAND_WORD
+                        + " m/" + INDEX_FIRST_MEMBER.getOneBased()
+                        + " e/" + INDEX_FIRST_EVENT.getOneBased());
+        assertEquals(new UnenrolCommand(INDEX_FIRST_MEMBER, INDEX_FIRST_EVENT), command);
     }
 
     @Test

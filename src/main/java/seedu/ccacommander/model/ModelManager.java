@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.ccacommander.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -12,8 +13,10 @@ import javafx.collections.transformation.FilteredList;
 import seedu.ccacommander.commons.core.GuiSettings;
 import seedu.ccacommander.commons.core.LogsCenter;
 import seedu.ccacommander.model.enrolment.Enrolment;
+import seedu.ccacommander.model.enrolment.exceptions.EnrolmentNotFoundException;
 import seedu.ccacommander.model.event.Event;
 import seedu.ccacommander.model.member.Member;
+import seedu.ccacommander.model.shared.Name;
 
 /**
  * Represents the in-memory model of the CcaCommander data.
@@ -145,9 +148,46 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void deleteEnrolment(Enrolment target) {
+        versionedCcaCommander.removeEnrolment(target);
+    }
+
+    @Override
     public void createEnrolment(Enrolment enrolment) {
         versionedCcaCommander.createEnrolment(enrolment);
         updateFilteredEnrolmentList(PREDICATE_SHOW_ALL_ENROLMENTS);
+    }
+
+    /**
+     *  Checks if the {@code lastShownEnrolmentList} contains a specific Enrolment object that has a Member and an
+     *  Event that matches the given {@param memberName} and {@param eventName} respectively, and returns that
+     *  specific Enrolment.
+     * @param lastShownEnrolmentList
+     * @param memberName
+     * @param eventName
+     * @throws EnrolmentNotFoundException if the enrolment cannot be found from the {@code lastShownEnrolmentList}
+     */
+    public static Enrolment findEnrolmentFromList(List<Enrolment> lastShownEnrolmentList,
+                                                  Name memberName, Name eventName) throws EnrolmentNotFoundException {
+        Enrolment selectedEnrolment = null;
+        int enrolmentListPointer = 0;
+
+        for (int i = 0; i < lastShownEnrolmentList.size(); i++) {
+            selectedEnrolment = lastShownEnrolmentList.get(i);
+            Name selectedMemberName = selectedEnrolment.getMemberName();
+            Name selectedEventName = selectedEnrolment.getEventName();
+
+            if (memberName.equals(selectedMemberName) && eventName.equals(selectedEventName)) {
+                break;
+            }
+            enrolmentListPointer++;
+        }
+
+        if (enrolmentListPointer == lastShownEnrolmentList.size()) {
+            throw new EnrolmentNotFoundException();
+        } else {
+            return selectedEnrolment;
+        }
     }
 
     @Override

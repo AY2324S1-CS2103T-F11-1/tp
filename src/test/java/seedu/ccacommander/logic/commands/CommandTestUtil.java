@@ -26,6 +26,7 @@ import seedu.ccacommander.commons.core.index.Index;
 import seedu.ccacommander.logic.commands.exceptions.CommandException;
 import seedu.ccacommander.model.CcaCommander;
 import seedu.ccacommander.model.Model;
+import seedu.ccacommander.model.enrolment.Enrolment;
 import seedu.ccacommander.model.enrolment.Hours;
 import seedu.ccacommander.model.enrolment.Remark;
 import seedu.ccacommander.model.event.Event;
@@ -183,11 +184,13 @@ public class CommandTestUtil {
         CcaCommander expectedCcaCommander = new CcaCommander(actualModel.getCcaCommander());
         List<Member> expectedFilteredMemberList = new ArrayList<>(actualModel.getFilteredMemberList());
         List<Event> expectedFilteredEventList = new ArrayList<>(actualModel.getFilteredEventList());
+        List<Enrolment> expectedFilteredEnrolmentList = new ArrayList<>(actualModel.getFilteredEnrolmentList());
 
         assertThrows(CommandException.class, expectedMessage, () -> command.execute(actualModel));
         assertEquals(expectedCcaCommander, actualModel.getCcaCommander());
         assertEquals(expectedFilteredMemberList, actualModel.getFilteredMemberList());
         assertEquals(expectedFilteredEventList, actualModel.getFilteredEventList());
+        assertEquals(expectedFilteredEnrolmentList, actualModel.getFilteredEnrolmentList());
     }
     /**
      * Updates {@code model}'s filtered list to show only the member at the given {@code targetIndex} in the

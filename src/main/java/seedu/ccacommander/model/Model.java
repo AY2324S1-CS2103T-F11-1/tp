@@ -85,6 +85,10 @@ public interface Model {
      */
     boolean hasEvent(Event event);
 
+    /**
+     * Deletes the given event.
+     * The event must exist in CcaCommander.
+     */
     void deleteEvent(Event target);
 
     /**
@@ -104,6 +108,12 @@ public interface Model {
      * Returns true if an enrolment with the same identity as {@code enrolment} exists in CcaCommander.
      */
     boolean hasEnrolment(Enrolment enrolment);
+
+    /**
+     * Deletes the given enrolment.
+     * The enrolment must exist in CcaCommander.
+     */
+    void deleteEnrolment(Enrolment target);
 
     /**
      * Creates the given event.
