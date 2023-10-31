@@ -50,6 +50,7 @@ public class CommandBox extends UiPart<Region> {
                 }
                 break;
             case BACK_SPACE:
+            case ENTER:
                 COMMAND_HISTORY.resetPointer();
                 break;
             default:
