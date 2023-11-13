@@ -17,7 +17,7 @@ Given below is a summary of my contributions to the project. All my contribution
 
 * **Edit Event Feature** [#160](https://github.com/AY2324S1-CS2103T-F11-1/tp/pull/160)
   * **Feature details:** Allows the user of CCACommander to edit an event in CCACommander's database.
-  * **Justifications:** Gives the user the ability to correct any mistakes in the details of the event, or add more information such as unfilled fields or tags.
+  * **Justifications:** Gives the user the ability to correct any mistakes in the details of the event, or add more information for unfilled fields like tags.
 
 * **View Members of Event Feature** [#181](https://github.com/AY2324S1-CS2103T-F11-1/tp/pull/181)
   * **Feature details:** Allows the user of CCACommander to view all the members attending an event.
@@ -37,13 +37,14 @@ Relevant tests were added for these commands.
 * **Fix `editMember` and `editEvent` commands logic to also update enrolment:** [#182](https://github.com/AY2324S1-CS2103T-F11-1/tp/pull/182) [#192](https://github.com/AY2324S1-CS2103T-F11-1/tp/pull/192)
   * **Enhancement details:** The enrolments' details of a member (event) is updated, if affected by the edit member (event) command.
   * **Justification:** Enrolment links a member and an event based on their names. When the identity (name) of a member/event is edited via the edit commands, the existing name fields for enrolment wasn't updated.
-    This would cause inconvenient to users, having to re-track all the attendance linked to a member or event, hence I have updated the logic
+    This would cause inconvenience to users, having to re-track all the attendance linked to a member or event, hence I have updated the logic
     to also modify the enrolment object when the name field is edited.
 
 * **Enhance UI and add toggle light/dark theme feature for UI:** [#194](https://github.com/AY2324S1-CS2103T-F11-1/tp/pull/194)
   * **Enhancement details:** Users can toggle between light and dark mode.
   * **Justification:** To adapt to the needs of CCA heads, who may want to work on CCA tasks during both day and night. Dark mode can reduce blue light
     that can interrupt sleep, it also saves energy because less power usage to display darker background.
+  * **Credits:** Implementation is inspired by Tutor’s Pet
 
 * **Fix `editEnrolment` command** [#265](https://github.com/AY2324S1-CS2103T-F11-1/tp/pull/265)
   * **Enhancement details:** The hours and remarks fields will be reflected in UI when edited via `editEnrolment` command.
@@ -61,6 +62,8 @@ Relevant tests were added for these commands.
 
 * **Developer Guide**
   * Added diagram for updated UI.
+  * Added class diagram for Member class and alternative design consideration section.
+  * Added class diagram for Event class and alternative design consideration section.
   * Updated parts of old diagrams where there were instances of AddressBook.
   * Updated general model class diagram.
   * Added use cases and glossary section:
